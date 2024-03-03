@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Web3 dApp</title>
+</head>
+<body>
+    <h1>Simple Web3 dApp</h1>
+    
+    <div>
+        <label for="contractAddress">Contract Address:</label>
+        <input type="text" id="contractAddress">
+    </div>
+    
+    <div>
+        <label for="contractAbi">Contract ABI:</label>
+        <textarea id="contractAbi" rows="10"></textarea>
+    </div>
+    
+    <div>
+        <label for="inputValue">Input Value:</label>
+        <input type="text" id="inputValue">
+    </div>
+    
+    <div>
+        <button onclick="getData()">Get Data</button>
+        <button onclick="sendData()">Send Data</button>
+    </div>
+
+    <div id="output"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script>
+        async function getData() {
+            const contractAddress = document.getElementById("contractAddress").value;
+            const contractAbi = JSON.parse(document.getElementById("contractAbi").value);
+            const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+            
+            const contract = new web3.eth.Contract(contractAbi, contractAddress);
+            const data = await contract.methods.getData().call();
+            
+            document.getElementById("output").innerText = `Retrieved data: ${data}`;
+        }
+        
+        async function sendData() {
+            const contractAddress = document.getElementById("contractAddress").value;
+            const contractAbi = JSON.parse(document.getElementById("contractAbi").value);
+            const inputValue = document.getElementById("inputValue").value;
+            const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+            
+            const accounts = await web3.eth.getAccounts();
+            const account = accounts[0];
+            
+            const contract = new web3.eth.Contract(contractAbi, contractAddress);
+            await contract.methods.setData(inputValue).send({ from: account });
+            
+            document.getElementById("output").innerText = `Sent data: ${inputValue}`;
+        }
+    </script>
+</body>
+</html>
