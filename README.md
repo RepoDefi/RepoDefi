@@ -1,5 +1,5 @@
 Welcome to Repo Swap
 
-An all-in-one cryptocurrency service that focuses on token issuance, cross-chain synthetic staking & interoperability, and a governance model that allows for a transparent and fair listing process. Repo Pad is ran by its community through a first-of-its-kind DAO protocol. The future of launchpads has arrived.
+Reposwap is a pioneering decentralized finance (DeFi) platform redefining token launches, liquidity provision, and cross-chain trading with innovative features and a commitment to transparency and community empowerment.
 
 More Details coming soon…
